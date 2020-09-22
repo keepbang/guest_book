@@ -19,9 +19,9 @@ mongoose.connect(config.mongoURI, {
 }).then(() => console.log('MongoDB connected...'))
 .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('Hello World!~~Hi'));
+app.get('/guest_book/', (req, res) => res.send('Hello World!~~Hi'));
 
-app.post('/api/insertBook', (req, res) => {
+app.post('/guest_book/insertBook', (req, res) => {
 
     const guestBook = new GuestBook(req.body);
     //mongoDB에서 쓰는 메소드
@@ -35,9 +35,20 @@ app.post('/api/insertBook', (req, res) => {
 })
 
 
-app.get('/api/selectList', (req, res) => {
+app.get('/guest_book/selectList', (req, res) => {
 
     GuestBook.find((err, data) => {
+        if(err) return res.json({success: false, err});
+        return res.status(200).json({
+            success:true,
+            data
+        })
+    });
+
+})
+
+app.get('/guest_book/select', (req, res) => {
+    GuestBook.find({type:req.body.type},(err, data) => {
         if(err) return res.json({success: false, err});
         return res.status(200).json({
             success:true,

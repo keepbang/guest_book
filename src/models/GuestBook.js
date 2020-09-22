@@ -8,6 +8,10 @@ const GuestBookSchema = mongoose.Schema({
     context : {
         type: String,
         maxlength: 2000
+    },
+    type : {
+        type : String,
+        maxLength: 5
     }
 });
 
