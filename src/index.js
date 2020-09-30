@@ -34,6 +34,12 @@ app.post('/guest_book/insertBook', (req, res) => {
     })
 })
 
+app.post('/guest_book/updateBook', (req, res) => {
+
+    const guestBook = new GuestBook(req.body);
+    
+})
+
 
 app.get('/guest_book/selectList', (req, res) => {
 
